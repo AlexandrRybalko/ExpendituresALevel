@@ -1,4 +1,6 @@
-﻿using BL.Services;
+﻿using AutoMapper;
+using BL.BLModels;
+using BL.Services;
 using ExpendituresALevel.Models.Category;
 using System;
 using System.Collections.Generic;
@@ -12,19 +14,23 @@ namespace ExpendituresALevel.Controllers
     {
         // GET: Category
         private readonly CategoryService _categoryService;
+        private readonly IMapper _mapper;
 
         public CategoryController()
         {
             _categoryService = new CategoryService();
+
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CategoryBLModel, CategoryModel>();
+                cfg.CreateMap<CategoryBLModel, CategoryModel>().ReverseMap();
+            });
         }
         public ActionResult MyCategories()
         {
             //List<CategoryBl> models = _categoryService.GetMyCategories();
-            CategoryModel model = new CategoryModel 
-            { 
-                Id = 1, 
-                Title = "test" 
-            };
+            var models = _mapper.Map<IEnumerable<CategoryModel>>(_categoryService.GetCategories());
+            var model = _mapper.Map<CategoryModel>(_categoryService.GetById(5));
 
             return View("/Views/Category/MyCategories.cshtml", model);
         }
