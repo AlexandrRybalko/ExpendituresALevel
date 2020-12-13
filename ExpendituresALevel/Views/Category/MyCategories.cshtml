@@ -1,0 +1,17 @@
+﻿@using ExpendituresALevel.Models.Category
+@model CategoryModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>I am on index category</h2>
+@if (!string.IsNullOrEmpty(Model.Title))
+{
+    <h1>This title is not empty</h1>
+    <h2>@Model.Title</h2>
+}
+else
+{
+    <h1>This title is empty</h1>
+}
+
