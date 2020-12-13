@@ -46,7 +46,7 @@ namespace BL.Services
             return _mapper.Map<CategoryBLModel>(category);
         }
 
-        public IEnumerable<CategoryBLModel> GetTransactions()
+        public IEnumerable<CategoryBLModel> GetCategories()
         {
             var categories = _categoryRepository.GetMyCategories();
             return _mapper.Map<IEnumerable<CategoryBLModel>>(categories);

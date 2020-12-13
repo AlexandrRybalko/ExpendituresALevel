@@ -19,7 +19,7 @@ namespace ExpendituresALevel.Controllers
         }
         public ActionResult MyCategories()
         {
-            //List<CategoryBl> model = _categoryService.GetMyCategories();
+            //List<CategoryBl> models = _categoryService.GetMyCategories();
             CategoryModel model = new CategoryModel 
             { 
                 Id = 1, 
