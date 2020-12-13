@@ -10,7 +10,7 @@ namespace DAL
 {
     public class ExpendituresContext : DbContext
     {
-        public ExpendituresContext() : base("Data Source = DESKTOP - CVLKMS0\\MSSQLSERVER01; Initial Catalog = Expenditures; Integrated Security = true")
+        public ExpendituresContext() : base("Data Source = DESKTOP-CVLKMS0\\MSSQLSERVER01; Initial Catalog = ExpendituresDB; Integrated Security = true")
         {
 
         }

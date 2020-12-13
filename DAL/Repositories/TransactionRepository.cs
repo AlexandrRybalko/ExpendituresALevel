@@ -31,6 +31,13 @@ namespace DAL.Repositories
             _ctx.SaveChanges();
         }
 
+        public Transaction GetById(int id)
+        {
+            var transaction = _ctx.Transactions.FirstOrDefault(x => x.Id == id);
+
+            return transaction;
+        }
+
         public IEnumerable<Transaction> GetTransactions()
         {
             return _ctx.Transactions.ToList();
