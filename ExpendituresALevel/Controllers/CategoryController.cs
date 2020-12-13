@@ -1,4 +1,5 @@
-﻿using ExpendituresALevel.Models.Category;
+﻿using BL.Services;
+using ExpendituresALevel.Models.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,15 @@ namespace ExpendituresALevel.Controllers
     public class CategoryController : Controller
     {
         // GET: Category
-        /*private readonly CategoryService _categoryService;
+        private readonly CategoryService _categoryService;
 
         public CategoryController()
         {
             _categoryService = new CategoryService();
-        }*/
+        }
         public ActionResult MyCategories()
         {
-            //List<CategoryBl> service.GetMyCategories();
+            //List<CategoryBl> model = _categoryService.GetMyCategories();
             CategoryModel model = new CategoryModel 
             { 
                 Id = 1, 
