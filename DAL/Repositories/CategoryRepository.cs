@@ -31,6 +31,13 @@ namespace DAL.Repositories
             _ctx.SaveChanges();
         }
 
+        public Category GetById(int id)
+        {
+            var сategory = _ctx.Categories.FirstOrDefault(x => x.Id == id);
+
+            return сategory;
+        }
+
         public IEnumerable<Category> GetMyCategories()
         {
             return _ctx.Categories.ToList();

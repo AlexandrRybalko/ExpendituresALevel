@@ -28,7 +28,7 @@ namespace BL.Services
             _mapper = new Mapper(mapperConfig);
         }
 
-        public void Create(CategoryBLModel model)
+        public void Create(TransactionBLModel model)
         {
             var transaction = _mapper.Map<Transaction>(model);
             _transactionRepository.Create(transaction);
@@ -37,6 +37,13 @@ namespace BL.Services
         public void DeleteById(int id)
         {
             _transactionRepository.DeleteById(id);
+        }
+
+        public TransactionBLModel GetById(int id)
+        {
+            var transaction = _transactionRepository.GetById(id);
+
+            return _mapper.Map<TransactionBLModel>(transaction);
         }
 
         public IEnumerable<TransactionBLModel> GetTransactions()

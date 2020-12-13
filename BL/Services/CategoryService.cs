@@ -39,6 +39,13 @@ namespace BL.Services
             _categoryRepository.DeleteById(id);
         }
 
+        public CategoryBLModel GetById(int id)
+        {
+            var category = _categoryRepository.GetById(id);
+
+            return _mapper.Map<CategoryBLModel>(category);
+        }
+
         public IEnumerable<CategoryBLModel> GetTransactions()
         {
             var categories = _categoryRepository.GetMyCategories();
