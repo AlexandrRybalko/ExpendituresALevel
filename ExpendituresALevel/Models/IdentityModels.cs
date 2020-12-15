@@ -29,5 +29,9 @@ namespace ExpendituresALevel.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ExpendituresALevel.Models.TransactionModel> TransactionModels { get; set; }
+
+        public System.Data.Entity.DbSet<ExpendituresALevel.Models.Category.CategoryModel> CategoryModels { get; set; }
     }
 }

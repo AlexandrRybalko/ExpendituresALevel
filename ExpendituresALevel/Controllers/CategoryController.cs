@@ -29,10 +29,11 @@ namespace ExpendituresALevel.Controllers
         public ActionResult MyCategories()
         {
             //List<CategoryBl> models = _categoryService.GetMyCategories();
-            var models = _mapper.Map<IEnumerable<CategoryModel>>(_categoryService.GetCategories());
-            var model = _mapper.Map<CategoryModel>(_categoryService.GetById(5));
+            var models = new List<CategoryModel> { new CategoryModel { Id = 1, Title = "ssss" }, new CategoryModel { Id = 2, Title = "ddddd" } };
+                //_mapper.Map<IEnumerable<CategoryModel>>(_categoryService.GetCategories());
+            //var model = _mapper.Map<CategoryModel>(_categoryService.GetById(5));
 
-            return View("/Views/Category/MyCategories.cshtml", model);
+            return View("/Views/Category/MyCategories.cshtml", models[1]);
         }
 
         public ActionResult Create()
