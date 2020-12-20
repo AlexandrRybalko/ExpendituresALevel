@@ -59,6 +59,7 @@ namespace ExpendituresALevel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Value,Description,Title,CreatedDate,UpdatedDate")] TransactionModel transactionModel)
         {
+
             if (ModelState.IsValid)
             {
                 transactions.Add(transactionModel);

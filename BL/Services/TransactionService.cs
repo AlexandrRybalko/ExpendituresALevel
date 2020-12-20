@@ -10,21 +10,35 @@ using System.Threading.Tasks;
 
 namespace BL.Services
 {
-    public class TransactionService
+    public interface ITransactionService
     {
-        private readonly TransactionRepository _transactionRepository;
+        void Create(TransactionBLModel model);
+
+        void DeleteById(int id);
+
+        TransactionBLModel GetById(int id);
+
+        IEnumerable<TransactionBLModel> GetTransactions();
+    }
+
+    public class TransactionService : ITransactionService
+    {
+        private readonly ITransactionRepository _transactionRepository;
         private readonly IMapper _mapper;
+
+        public TransactionService(ITransactionRepository transactionRepository)
+        {
+            _transactionRepository = transactionRepository;
+
+            var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile<BLAutoMapperProfile>());
+
+            _mapper = new Mapper(mapperConfig);
+        }
 
         public TransactionService()
         {
+            var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile<BLAutoMapperProfile>());
             _transactionRepository = new TransactionRepository();
-
-            var mapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Transaction, TransactionBLModel>();
-                cfg.CreateMap<Transaction, TransactionBLModel>().ReverseMap();
-            });
-
             _mapper = new Mapper(mapperConfig);
         }
 

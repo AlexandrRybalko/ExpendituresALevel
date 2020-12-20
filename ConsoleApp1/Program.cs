@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BL.BLModels;
 using BL.Services;
+using ExpendituresALevel.App_Start;
 using ExpendituresALevel.Models;
 using ExpendituresALevel.Models.Category;
 using System;
@@ -15,22 +16,25 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            PL pl = new PL();
+            LightInjectConfig.Congigurate();
+            PL pl = new PL(new CategoryService(), new TransactionService());
 
+            
+            pl.CreateCategory(new CategoryModel { Title = "ffff", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
             var c = pl.GetCategories();
         }
     }
 
     class PL
     {
-        private readonly CategoryService categoryService;
-        private readonly TransactionService transactionService;
+        private readonly ICategoryService _categoryService;
+        private readonly ITransactionService _transactionService;
         private readonly IMapper mapper;
 
-        public PL()
+        public PL(ICategoryService categoryService, ITransactionService transactionService)
         {
-            categoryService = new CategoryService();
-            transactionService = new TransactionService();
+            _categoryService = categoryService;
+            _transactionService = transactionService;
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
@@ -46,7 +50,7 @@ namespace ConsoleApp1
 
         public IEnumerable<CategoryModel> GetCategories()
         {
-            var c = categoryService.GetCategories();
+            var c = _categoryService.GetCategories();
 
             return mapper.Map<IEnumerable<CategoryModel>>(c);
         }
@@ -54,23 +58,23 @@ namespace ConsoleApp1
         public void CreateCategory(CategoryModel model)
         {
             var c = mapper.Map<CategoryBLModel>(model);
-            categoryService.Create(c);
+            _categoryService.Create(c);
         }
 
         public CategoryModel GetCategoryById(int id)
         {
-            var c = categoryService.GetById(id);
+            var c = _categoryService.GetById(id);
             return mapper.Map<CategoryModel>(c);
         }
 
         public void DeleteCategory(int id)
         {
-            categoryService.DeleteById(id);
+            _categoryService.DeleteById(id);
         }
 
         public IEnumerable<TransactionModel> GetTransactions()
         {
-            var c = transactionService.GetTransactions();
+            var c = _transactionService.GetTransactions();
 
             return mapper.Map<IEnumerable<TransactionModel>>(c);
         }
@@ -78,18 +82,18 @@ namespace ConsoleApp1
         public void CreateTransaction(TransactionModel model)
         {
             var c = mapper.Map<TransactionBLModel>(model);
-            transactionService.Create(c);
+            _transactionService.Create(c);
         }
 
         public TransactionModel GetTransactionById(int id)
         {
-            var c = transactionService.GetById(id);
+            var c = _transactionService.GetById(id);
             return mapper.Map<TransactionModel>(c);
         }
 
         public void DeleteTransaction(int id)
         {
-            transactionService.DeleteById(id);
+            _transactionService.DeleteById(id);
         }
     }
 }

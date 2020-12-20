@@ -12,7 +12,7 @@ namespace DAL
     {
         public ExpendituresContext() : base("name=ExpendituresContext")
         {
-
+            Database.SetInitializer<ExpendituresContext>(new ExpenditureInitializer());
         }
 
         public DbSet<Category> Categories { get; set; }

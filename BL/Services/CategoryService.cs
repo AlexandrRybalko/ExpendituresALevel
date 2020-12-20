@@ -10,20 +10,34 @@ using System.Threading.Tasks;
 
 namespace BL.Services
 {
-    public class CategoryService
+    public interface ICategoryService
     {
-        private readonly CategoryRepository _categoryRepository;
+        void Create(CategoryBLModel model);
+        void DeleteById(int id);
+        CategoryBLModel GetById(int id);
+        void Edit(CategoryBLModel editedCategory);
+        IEnumerable<CategoryBLModel> GetCategories();
+    }
+
+    public class CategoryService : ICategoryService
+    {
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
+
+        public CategoryService(ICategoryRepository categoryRepository)
+        {
+            _categoryRepository = categoryRepository;
+
+            var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile<BLAutoMapperProfile>());
+
+            _mapper = new Mapper(mapperConfig);
+        }
 
         public CategoryService()
         {
             _categoryRepository = new CategoryRepository();
 
-            var mapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Category, CategoryBLModel>();
-                cfg.CreateMap<Category, CategoryBLModel>().ReverseMap();
-            });
+            var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile<BLAutoMapperProfile>());
 
             _mapper = new Mapper(mapperConfig);
         }
@@ -44,6 +58,12 @@ namespace BL.Services
             var category = _categoryRepository.GetById(id);
 
             return _mapper.Map<CategoryBLModel>(category);
+        }
+
+        public void Edit(CategoryBLModel editedCategory)
+        {
+            var category = _mapper.Map<Category>(editedCategory);
+            _categoryRepository.Edit(category);
         }
 
         public IEnumerable<CategoryBLModel> GetCategories()

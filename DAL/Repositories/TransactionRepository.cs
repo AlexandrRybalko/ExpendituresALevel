@@ -7,7 +7,18 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class TransactionRepository
+    public interface ITransactionRepository
+    {
+        void Create(Transaction model);
+
+        void DeleteById(int id);
+
+        Transaction GetById(int id);
+
+        IEnumerable<Transaction> GetTransactions();
+    }
+
+    public class TransactionRepository : ITransactionRepository
     {
         private readonly ExpendituresContext _ctx;
 

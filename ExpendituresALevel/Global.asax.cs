@@ -1,3 +1,4 @@
+using ExpendituresALevel.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace ExpendituresALevel
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            LightInjectConfig.Congigurate();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }

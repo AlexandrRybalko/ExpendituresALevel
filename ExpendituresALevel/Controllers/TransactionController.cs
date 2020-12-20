@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,12 @@ namespace ExpendituresALevel.Controllers
 {
     public class TransactionController : Controller
     {
+        private readonly ITransactionService _transactionService;
+
+        public TransactionController(ITransactionService transactionService)
+        {
+            _transactionService = transactionService;
+        }
         // GET: Transaction
         public ActionResult Index()
         {

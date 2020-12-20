@@ -2,13 +2,14 @@
 using DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class ExpenditureInitializer
+    public class ExpenditureInitializer : CreateDatabaseIfNotExists<ExpendituresContext>
     {
         public void Initialize(ExpendituresContext context)
         {
@@ -33,6 +34,11 @@ namespace DAL
             context.Categories.AddRange(categories);
             context.Transactions.AddRange(transactions);
             context.SaveChanges();
+        }
+
+        protected override void Seed(ExpendituresContext ctx)
+        {
+            Initialize(ctx);
         }
     }
 }
