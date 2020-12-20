@@ -1,9 +1,10 @@
 ﻿@model ExpendituresALevel.Models.TransactionModel
 
 <div>
-    <h4>TransactionModel</h4>
+    
     <hr />
     <dl class="dl-horizontal">
+        <h4 style="font-weight: 700;">@Model.Title</h4>
         <dt>
             @Html.DisplayNameFor(model => model.Value)
         </dt>
@@ -21,32 +22,25 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Category.Title)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Category.Title)
         </dd>
+        <!--
+            <dt>
+                //Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedDate)
-        </dd>
+            <dd>
+                //Html.DisplayFor(model => model.Title)
+            </dd>
+    -->
 
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id})
 </p>

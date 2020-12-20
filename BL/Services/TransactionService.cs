@@ -15,6 +15,7 @@ namespace BL.Services
         void Create(TransactionBLModel model);
 
         void DeleteById(int id);
+        void Edit(TransactionBLModel model);
 
         TransactionBLModel GetById(int id);
 
@@ -58,6 +59,12 @@ namespace BL.Services
             var transaction = _transactionRepository.GetById(id);
 
             return _mapper.Map<TransactionBLModel>(transaction);
+        }
+
+        public void Edit(TransactionBLModel editedTransaction)
+        {
+            var transaction = _mapper.Map<Transaction>(editedTransaction);
+            _transactionRepository.Edit(transaction);
         }
 
         public IEnumerable<TransactionBLModel> GetTransactions()

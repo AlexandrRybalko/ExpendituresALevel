@@ -12,5 +12,7 @@ namespace DAL.Entities
         public string Title { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }

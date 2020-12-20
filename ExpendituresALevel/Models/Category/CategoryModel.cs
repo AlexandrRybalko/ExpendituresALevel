@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace ExpendituresALevel.Models.Category
 {
@@ -11,5 +9,7 @@ namespace ExpendituresALevel.Models.Category
         public string Title { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
+
+        public ICollection<TransactionModel> Transactions { get; set; }
     }
 }

@@ -14,5 +14,8 @@ namespace BL.BLModels
         public string Title { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
+
+        public int CategoryId { get; set; }
+        public CategoryBLModel Category { get; set; }
     }
 }

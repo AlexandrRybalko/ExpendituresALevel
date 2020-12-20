@@ -271,6 +271,9 @@
     <Content Include="Views\Transaction\_TransactionData.cshtml" />
     <Content Include="Views\Category\Categories.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Transaction\Transactions.cshtml" />
+    <Content Include="Views\Transaction\Create.cshtml" />
+    <Content Include="Views\Shared\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

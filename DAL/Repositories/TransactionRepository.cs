@@ -1,6 +1,7 @@
 ﻿using DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace DAL.Repositories
         void DeleteById(int id);
 
         Transaction GetById(int id);
+        void Edit(Transaction model);
 
         IEnumerable<Transaction> GetTransactions();
     }
@@ -42,6 +44,18 @@ namespace DAL.Repositories
             _ctx.SaveChanges();
         }
 
+        public void Edit(Transaction model)
+        {
+            var transaction = GetById(model.Id);
+
+            transaction.Title = model.Title;
+            transaction.Description = model.Description;
+            transaction.CategoryId = model.CategoryId;
+            transaction.UpdatedDate = DateTime.Now;
+
+            _ctx.SaveChanges();
+        }
+
         public Transaction GetById(int id)
         {
             var transaction = _ctx.Transactions.FirstOrDefault(x => x.Id == id);
@@ -51,7 +65,7 @@ namespace DAL.Repositories
 
         public IEnumerable<Transaction> GetTransactions()
         {
-            return _ctx.Transactions.ToList();
+            return _ctx.Transactions.Include(x => x.Category);
         }
     }
 }

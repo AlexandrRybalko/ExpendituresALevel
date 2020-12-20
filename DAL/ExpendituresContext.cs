@@ -22,7 +22,9 @@ namespace DAL
         {
             base.OnModelCreating(modelBuilder);
 
-
+            modelBuilder.Entity<Transaction>()
+                .HasRequired(x => x.Category)
+                .WithMany(x => x.Transactions);
         }
     }
 }

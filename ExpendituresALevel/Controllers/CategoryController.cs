@@ -89,10 +89,15 @@ namespace ExpendituresALevel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CategoryModel category)
         {
-            var blCategory = _mapper.Map<CategoryBLModel>(category);
-            _categoryService.Edit(blCategory);
+            if (ModelState.IsValid)
+            {
+                var blCategory = _mapper.Map<CategoryBLModel>(category);
+                _categoryService.Edit(blCategory);
 
-            return Categories();
+                return Categories();
+            }
+
+            return View(category);
         }
 
         public ActionResult GetTransactionList()

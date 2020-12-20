@@ -12,5 +12,7 @@ namespace BL.BLModels
         public string Title { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
+
+        public ICollection<TransactionBLModel> Transactions { get; set; }
     }
 }
