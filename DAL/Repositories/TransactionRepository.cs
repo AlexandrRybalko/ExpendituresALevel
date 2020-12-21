@@ -46,12 +46,7 @@ namespace DAL.Repositories
 
         public void Edit(Transaction model)
         {
-            var transaction = GetById(model.Id);
-
-            transaction.Title = model.Title;
-            transaction.Description = model.Description;
-            transaction.CategoryId = model.CategoryId;
-            transaction.UpdatedDate = DateTime.Now;
+            _ctx.Entry(model).State = EntityState.Modified;
 
             _ctx.SaveChanges();
         }

@@ -91,6 +91,7 @@ namespace ExpendituresALevel.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.UpdatedDate = DateTime.Now;
                 var blCategory = _mapper.Map<CategoryBLModel>(category);
                 _categoryService.Edit(blCategory);
 

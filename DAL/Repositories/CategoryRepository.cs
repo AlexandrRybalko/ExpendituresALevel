@@ -50,10 +50,7 @@ namespace DAL.Repositories
 
         public void Edit(Category editedCategory)
         {
-            var category = GetById(editedCategory.Id);
-
-            category.Title = editedCategory.Title;
-            category.UpdatedDate = DateTime.Now;
+            _ctx.Entry(editedCategory).State = System.Data.Entity.EntityState.Modified;
 
             _ctx.SaveChanges();
         }

@@ -74,6 +74,7 @@ namespace ExpendituresALevel.Controllers
         {
             if (ModelState.IsValid)
             {
+                transaction.UpdatedDate = DateTime.Now;
                 var blCategory = _mapper.Map<TransactionBLModel>(transaction);
                 _transactionService.Edit(blCategory);
 
