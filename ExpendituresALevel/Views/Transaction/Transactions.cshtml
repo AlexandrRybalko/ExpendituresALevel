@@ -7,9 +7,9 @@
 <h2>Transactions</h2>
 
 @{
-    foreach (var category in Model)
+    foreach (var transaction in Model)
     {
-        Html.RenderPartial("/Views/Transaction/_TransactionData.cshtml", category);
+        Html.RenderPartial("/Views/Transaction/_TransactionData.cshtml", transaction);
     }
 }
 
