@@ -14,6 +14,10 @@ namespace ExpendituresALevel
 
             CreateMap<TransactionBLModel, TransactionModel>();
             CreateMap<TransactionBLModel, TransactionModel>().ReverseMap();
+
+            CreateMap<CategoryBLModel, AutoCompleteModel>()
+                .ForMember(x => x.data, opt => opt.MapFrom(src => src.Id))
+                .ForMember(x => x.value, opt => opt.MapFrom(src => src.Title));
         }
     }
 }

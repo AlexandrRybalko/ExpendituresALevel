@@ -32,7 +32,8 @@ namespace ExpendituresALevel
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/report").Include(
-                      "~/Content/Chart.min.css"));
+                      "~/Content/Chart.min.css",
+                      "~/Content/autocomplete.css"));
         }
     }
 }

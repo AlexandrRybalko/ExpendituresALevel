@@ -50,9 +50,11 @@ function initAutocomplete() {
     ];
 
     $('#autocomplete-report').autocomplete({
-        lookup: countries,
+        //lookup: countries,
+        //var v = document.querySelector('#autocomplete-report').value;
+        serviceUrl: `Statistic/AutoCompleteSuggestion`.replace("&", "?"),
         onSelect: function (suggestion) {
-            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+            //alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
         }
     });
 }
