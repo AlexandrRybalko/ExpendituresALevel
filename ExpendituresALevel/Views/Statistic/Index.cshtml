@@ -1,0 +1,18 @@
+﻿<h1>Statistics</h1>
+<div class="input-group">
+    <span></span>
+    <input id="autocomplete-report" type="text" class="form-control" placeholder="Choose category" aria-describedby="basic-addon1" />
+</div>
+<br />
+<button type="button" class="btn btn-primary">Generate report</button>
+
+<canvas id="chartReport" width="400" height="400"></canvas>
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
+
+@section scripts{
+@Styles.Render("~/Content/report")
+@Scripts.Render("~/bundles/report")
+}
+
