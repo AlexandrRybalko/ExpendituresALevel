@@ -1,4 +1,5 @@
 ﻿using DAL.Entities;
+using System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace DAL.Repositories
 
         public Category GetById(int id)
         {
-            return _ctx.Categories.FirstOrDefault(x => x.Id == id);
+            return _ctx.Categories.Include(x => x.Transactions).FirstOrDefault(x => x.Id == id);
         }
 
         public void Edit(Category editedCategory)
@@ -57,7 +58,7 @@ namespace DAL.Repositories
 
         public IEnumerable<Category> GetMyCategories()
         {
-            return _ctx.Categories.ToList();
+            return _ctx.Categories.Include(x => x.Transactions).ToList();
         }
     }
 }

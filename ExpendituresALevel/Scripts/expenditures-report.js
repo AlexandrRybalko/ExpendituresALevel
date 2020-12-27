@@ -1,60 +1,83 @@
 ﻿$().ready(function () {
-    renderChart();
-    initAutocomplete();
+    initAutocomplete();   
 });
 
+function f() {
+    renderChart();
+}
+
 function renderChart() {
+    var categoryId = document.querySelector('#autocomplete-report').getAttribute('category-id');
     var ctx = document.getElementById('chartReport').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+    var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    var address = `/Statistic/GetNumberOfTransactionsByDay?categoryId=${Number.parseInt(categoryId)}`;
+    var response = $.getJSON(address, function (json) {
+        return json
+    }).done(function () {
+        var data = response.responseJSON.result;
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: days,
+                datasets: [{
+                    label: '# of Transactions',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 54, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
                 }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
-        }
-    });
+        });
+    });  
 }
 
 function initAutocomplete() {
-    var countries = [
-        { value: 'Andorra', data: 'AD' },
-        { value: 'Zimbabwe', data: 'ZZ' }
-    ];
-
     $('#autocomplete-report').autocomplete({
-        //lookup: countries,
-        //var v = document.querySelector('#autocomplete-report').value;
         serviceUrl: `Statistic/AutoCompleteSuggestion`.replace("&", "?"),
-        onSelect: function (suggestion) {
-            //alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+        onSelect: function () {
+            if (document.querySelector('#autocomplete-report').value.length != 0) {
+                var a = document.querySelector('#autocomplete-report').value;
+                var response = $.getJSON(`/Statistic/AutoCompleteSuggestion?query=${document.querySelector('#autocomplete-report').value}`, function (json) {
+                    return json
+                }).done(function () {
+                    response.responseJSON;
+                    if (response.responseJSON.suggestions.length == 1) {
+                        var id = response.responseJSON.suggestions[0].data;
+                        document.querySelector('#autocomplete-report').setAttribute('category-id', id);
+                    }
+                });
+
+                //response.responseJSON;
+                //debugger;
+                //if (response.responseJSON.suggestions.length == 1) {
+                //    var id = response.responseJSON.suggestions[0].data;
+                //    document.querySelector('#autocomplete-report').setAttribute('category-id', id);
+                //}
+            }
         }
     });
 }

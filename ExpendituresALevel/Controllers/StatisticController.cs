@@ -39,7 +39,23 @@ namespace ExpendituresALevel.Controllers
             var result = new JsonResult();
             result.Data = new { suggestions = filteredSuggestions };
 
-            return Json(new { suggestions = filteredSuggestions }, JsonRequestBehavior.AllowGet) ;
+            return Json(new { suggestions = filteredSuggestions }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetNumberOfTransactionsByDay(int categoryId)
+        {
+            int[] statistics = new int[] {
+                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Monday).Count(),
+                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Tuesday).Count(),
+                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Wednesday).Count(),
+                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Thursday).Count(),
+                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Friday).Count(),
+                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Saturday).Count(),
+                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Sunday).Count()};
+
+            var a = Json(new { result = new int[]{ statistics[0], statistics[1], statistics[2], statistics[3], statistics[4], statistics[5], statistics[6] }},
+                JsonRequestBehavior.AllowGet);
+            return a;
         }
     }
 }

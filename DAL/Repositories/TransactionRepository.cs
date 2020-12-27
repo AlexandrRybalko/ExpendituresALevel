@@ -60,7 +60,7 @@ namespace DAL.Repositories
 
         public IEnumerable<Transaction> GetTransactions()
         {
-            return _ctx.Transactions.Include(x => x.Category);
+            return _ctx.Transactions.Include(x => x.Category).ToList();
         }
     }
 }
