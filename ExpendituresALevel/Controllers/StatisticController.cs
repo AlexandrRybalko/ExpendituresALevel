@@ -53,9 +53,8 @@ namespace ExpendituresALevel.Controllers
                 _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Saturday).Count(),
                 _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Sunday).Count()};
 
-            var a = Json(new { result = new int[]{ statistics[0], statistics[1], statistics[2], statistics[3], statistics[4], statistics[5], statistics[6] }},
-                JsonRequestBehavior.AllowGet);
-            return a;
+            var result = Json(new { result = statistics }, JsonRequestBehavior.AllowGet);
+            return result;
         }
     }
 }

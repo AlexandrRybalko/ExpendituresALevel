@@ -2,10 +2,6 @@
     initAutocomplete();   
 });
 
-function f() {
-    renderChart();
-}
-
 function renderChart() {
     var categoryId = document.querySelector('#autocomplete-report').getAttribute('category-id');
     var ctx = document.getElementById('chartReport').getContext('2d');
@@ -60,7 +56,6 @@ function initAutocomplete() {
         serviceUrl: `Statistic/AutoCompleteSuggestion`.replace("&", "?"),
         onSelect: function () {
             if (document.querySelector('#autocomplete-report').value.length != 0) {
-                var a = document.querySelector('#autocomplete-report').value;
                 var response = $.getJSON(`/Statistic/AutoCompleteSuggestion?query=${document.querySelector('#autocomplete-report').value}`, function (json) {
                     return json
                 }).done(function () {
@@ -70,13 +65,6 @@ function initAutocomplete() {
                         document.querySelector('#autocomplete-report').setAttribute('category-id', id);
                     }
                 });
-
-                //response.responseJSON;
-                //debugger;
-                //if (response.responseJSON.suggestions.length == 1) {
-                //    var id = response.responseJSON.suggestions[0].data;
-                //    document.querySelector('#autocomplete-report').setAttribute('category-id', id);
-                //}
             }
         }
     });
