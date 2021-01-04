@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BL.Services;
+using ExpendituresALevel.Filters;
 using ExpendituresALevel.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace ExpendituresALevel.Controllers
 {
+    [Authorize]
     public class StatisticController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -25,7 +27,9 @@ namespace ExpendituresALevel.Controllers
             _mapper = new Mapper(mapperConfig);
         }
 
+
         // GET: Statistics
+        [MyAuthorize]
         public ActionResult Index()
         {
             return View();

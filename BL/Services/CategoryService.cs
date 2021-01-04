@@ -2,6 +2,7 @@
 using BL.BLModels;
 using DAL.Entities;
 using DAL.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace BL.Services
@@ -46,7 +47,14 @@ namespace BL.Services
 
         public void DeleteById(int id)
         {
-            _categoryRepository.DeleteById(id);
+            try
+            {
+                _categoryRepository.DeleteById(id);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public CategoryBLModel GetById(int id)

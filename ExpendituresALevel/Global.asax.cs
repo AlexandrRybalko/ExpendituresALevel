@@ -7,6 +7,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using log4net.Config;
+using System.IO;
+using System.Configuration;
 
 namespace ExpendituresALevel
 {
@@ -20,6 +23,7 @@ namespace ExpendituresALevel
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             LightInjectConfig.Congigurate();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            XmlConfigurator.Configure();
         }
     }
 }

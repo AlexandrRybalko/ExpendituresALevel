@@ -1,4 +1,6 @@
-﻿using ExpendituresALevel.Models;
+﻿using ExpendituresALevel.Filters;
+using ExpendituresALevel.Filters.Exceptions;
+using ExpendituresALevel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ using System.Web.Mvc;
 
 namespace ExpendituresALevel.Controllers
 {
+    [MyException]
     public class ReportController : ApiController
     {
         [System.Web.Http.HttpGet]
@@ -32,10 +35,12 @@ namespace ExpendituresALevel.Controllers
         }
 
         [System.Web.Http.HttpGet]
+        [MyException]
         public string GetTrafficData(string category)
         {
             if (true)
             {
+                throw new CategoryNotExistException("This category doesn't exist");
                 if (true)
                 {
                     return "ok";

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace ExpendituresALevel.Controllers
 {
+    [Authorize]
     public class TransactionController : Controller
     {
         private readonly ITransactionService _transactionService;

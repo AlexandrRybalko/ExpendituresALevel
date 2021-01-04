@@ -6,14 +6,25 @@ using ExpendituresALevel.Models.Category;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using log4net;
+using ExpendituresALevel.Filters;
+using ExpendituresALevel.Filters.Exceptions;
 
 namespace ExpendituresALevel.Controllers
 {
+    [Authorize]
+    [MyException]
     public class CategoryController : Controller
     {
         // GET: Category
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+        private static ILog logger = LogManager.GetLogger(typeof(CategoryController));
+
+        public ActionResult LoggerTest()
+        {
+            throw new CategoryNotExistException("This category doesn't exist");
+        }
 
         public CategoryController(ICategoryService categoryService)
         {
@@ -25,20 +36,6 @@ namespace ExpendituresALevel.Controllers
             });
             _mapper = new Mapper(mapperConfig);
         }
-
-        /*public ActionResult MyCategories()
-        {
-            /*var model = _categoryService.GetById(10);
-            var cat = _mapper.Map<CategoryModel>(model);*/
-            /*var model = new List<CategoryModel> { new CategoryModel { Id = 1, Title = "ssss" }, 
-                new CategoryModel { Id = 2, Title = "ddddd" }, 
-                new CategoryModel { Id = 100, Title = "test" } };
-                //_mapper.Map<IEnumerable<CategoryModel>>(_categoryService.GetCategories());
-            var model = _mapper.Map<CategoryModel>(new CategoryBLModel { Id = 100, Title = "test"});
-           /var model = new CategoryModel { Id = 100, Title = "test" };
-
-            return View("/Views/Category/Categories.cshtml");
-        }*/
 
         public ActionResult Categories()
         {
@@ -72,9 +69,16 @@ namespace ExpendituresALevel.Controllers
 
         public ActionResult Delete(int id)
         {
-            _categoryService.DeleteById(id);
+            try
+            {
+                _categoryService.DeleteById(id);
 
-            return Categories();
+                return Categories();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public ActionResult Edit(int id)

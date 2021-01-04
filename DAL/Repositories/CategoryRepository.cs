@@ -38,10 +38,17 @@ namespace DAL.Repositories
 
         public void DeleteById(int id)
         {
-            var entity = _ctx.Categories.FirstOrDefault(x => x.Id == id);
-            _ctx.Categories.Remove(entity);
+            try
+            {
+                var entity = _ctx.Categories.FirstOrDefault(x => x.Id == id);
+                _ctx.Categories.Remove(entity);
 
-            _ctx.SaveChanges();
+                _ctx.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public Category GetById(int id)

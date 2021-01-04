@@ -14,86 +14,21 @@ namespace ConsoleApp1
 {
     class Program
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         static void Main(string[] args)
         {
-            LightInjectConfig.Congigurate();
-            PL pl = new PL(new CategoryService(), new TransactionService());
-
-            
-            pl.CreateCategory(new CategoryModel { Title = "ffff", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
-            var c = pl.GetCategories();
-        }
-    }
-
-    class PL
-    {
-        private readonly ICategoryService _categoryService;
-        private readonly ITransactionService _transactionService;
-        private readonly IMapper mapper;
-
-        public PL(ICategoryService categoryService, ITransactionService transactionService)
-        {
-            _categoryService = categoryService;
-            _transactionService = transactionService;
-
-            var mapperConfig = new MapperConfiguration(cfg =>
+            int a = 0;
+            try
             {
-                cfg.CreateMap<CategoryModel, CategoryBLModel>();
-                cfg.CreateMap<CategoryModel, CategoryBLModel>().ReverseMap();
-
-                cfg.CreateMap<TransactionModel, TransactionBLModel>();
-                cfg.CreateMap<TransactionModel, TransactionBLModel>().ReverseMap();
-            });
-
-            mapper = new Mapper(mapperConfig);
-        }
-
-        public IEnumerable<CategoryModel> GetCategories()
-        {
-            var c = _categoryService.GetCategories();
-
-            return mapper.Map<IEnumerable<CategoryModel>>(c);
-        }
-
-        public void CreateCategory(CategoryModel model)
-        {
-            var c = mapper.Map<CategoryBLModel>(model);
-            _categoryService.Create(c);
-        }
-
-        public CategoryModel GetCategoryById(int id)
-        {
-            var c = _categoryService.GetById(id);
-            return mapper.Map<CategoryModel>(c);
-        }
-
-        public void DeleteCategory(int id)
-        {
-            _categoryService.DeleteById(id);
-        }
-
-        public IEnumerable<TransactionModel> GetTransactions()
-        {
-            var c = _transactionService.GetTransactions();
-
-            return mapper.Map<IEnumerable<TransactionModel>>(c);
-        }
-
-        public void CreateTransaction(TransactionModel model)
-        {
-            var c = mapper.Map<TransactionBLModel>(model);
-            _transactionService.Create(c);
-        }
-
-        public TransactionModel GetTransactionById(int id)
-        {
-            var c = _transactionService.GetById(id);
-            return mapper.Map<TransactionModel>(c);
-        }
-
-        public void DeleteTransaction(int id)
-        {
-            _transactionService.DeleteById(id);
+                var b = (object)a;
+                long c = (long)b;
+            }
+            catch(Exception e)
+            {
+                log.Error(e.ToString());
+            }
+            Console.ReadLine();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿$().ready(function () {
-    initAutocomplete();   
+    initAutocomplete();
+    $('#report-btn').click(getTrafficData);
 });
 
 function renderChart() {
@@ -66,6 +67,22 @@ function initAutocomplete() {
                     }
                 });
             }
+        }
+    });
+}
+
+function getTrafficData() {
+    var categoryName = $('#autocomplete-report').val();
+
+    $.ajax({
+        url: "api/Report/GetTrafficData/",
+        type: "GET",
+        data: { "category": categoryName },
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (error) {
+            alert(32);
         }
     });
 }
