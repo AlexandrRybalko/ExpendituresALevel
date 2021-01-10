@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\TransactionWithContextController.cs" />
@@ -216,9 +217,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101061944282_InitialCreate.cs" />
+    <Compile Include="Migrations\202101061944282_InitialCreate.designer.cs">
+      <DependentUpon>202101061944282_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101081644594_Initial_Create.cs" />
+    <Compile Include="Migrations\202101081644594_Initial_Create.designer.cs">
+      <DependentUpon>202101081644594_Initial_Create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101082225088_M.cs" />
+    <Compile Include="Migrations\202101082225088_M.designer.cs">
+      <DependentUpon>202101082225088_M.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101101435132_Added_UserId_To_TransactionModel.cs" />
+    <Compile Include="Migrations\202101101435132_Added_UserId_To_TransactionModel.designer.cs">
+      <DependentUpon>202101101435132_Added_UserId_To_TransactionModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101101506530_SomeMigration.cs" />
+    <Compile Include="Migrations\202101101506530_SomeMigration.designer.cs">
+      <DependentUpon>202101101506530_SomeMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AutoCompleteModel.cs" />
     <Compile Include="Models\Category\CategoryModel.cs" />
+    <Compile Include="Models\CreateRoleModel.cs" />
+    <Compile Include="Models\EditRoleModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TransactionModel.cs" />
@@ -305,6 +329,9 @@
     <Content Include="Views\Transaction\Edit.cshtml" />
     <Content Include="Views\Statistic\Index.cshtml" />
     <Content Include="Views\Shared\404Error.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,6 +355,23 @@
       <Project>{fe32c504-911b-48cd-b122-7058d3d074bb}</Project>
       <Name>BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101061944282_InitialCreate.resx">
+      <DependentUpon>202101061944282_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101081644594_Initial_Create.resx">
+      <DependentUpon>202101081644594_Initial_Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101082225088_M.resx">
+      <DependentUpon>202101082225088_M.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101101435132_Added_UserId_To_TransactionModel.resx">
+      <DependentUpon>202101101435132_Added_UserId_To_TransactionModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101101506530_SomeMigration.resx">
+      <DependentUpon>202101101506530_SomeMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

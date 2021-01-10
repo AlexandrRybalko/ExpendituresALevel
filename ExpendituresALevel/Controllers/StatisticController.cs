@@ -2,6 +2,7 @@
 using BL.Services;
 using ExpendituresALevel.Filters;
 using ExpendituresALevel.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace ExpendituresALevel.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class StatisticController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -29,7 +30,6 @@ namespace ExpendituresALevel.Controllers
 
 
         // GET: Statistics
-        [MyAuthorize]
         public ActionResult Index()
         {
             return View();
@@ -48,14 +48,15 @@ namespace ExpendituresALevel.Controllers
 
         public JsonResult GetNumberOfTransactionsByDay(int categoryId)
         {
+            var transactions = _categoryService.GetById(categoryId).Transactions.Where(x => x.UserId == User.Identity.GetUserId());
             int[] statistics = new int[] {
-                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Monday).Count(),
-                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Tuesday).Count(),
-                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Wednesday).Count(),
-                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Thursday).Count(),
-                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Friday).Count(),
-                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Saturday).Count(),
-                _categoryService.GetById(categoryId).Transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Sunday).Count()};
+                transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Monday).Count(),
+                transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Tuesday).Count(),
+                transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Wednesday).Count(),
+                transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Thursday).Count(),
+                transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Friday).Count(),
+                transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Saturday).Count(),
+                transactions.Where(x => x.CreatedDate.DayOfWeek == DayOfWeek.Sunday).Count()};
 
             var result = Json(new { result = statistics }, JsonRequestBehavior.AllowGet);
             return result;

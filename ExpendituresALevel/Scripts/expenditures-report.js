@@ -1,6 +1,6 @@
 ﻿$().ready(function () {
     initAutocomplete();
-    $('#report-btn').click(getTrafficData);
+    $('#report-btn').click(renderChart);
 });
 
 function renderChart() {
@@ -71,7 +71,7 @@ function initAutocomplete() {
     });
 }
 
-function getTrafficData() {
+/*function getTrafficData() {
     var categoryName = $('#autocomplete-report').val();
 
     $.ajax({
@@ -85,4 +85,4 @@ function getTrafficData() {
             alert(32);
         }
     });
-}
+}*/

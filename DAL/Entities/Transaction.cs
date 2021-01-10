@@ -14,6 +14,7 @@ namespace DAL.Entities
         public string Title { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public string UserId { get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }

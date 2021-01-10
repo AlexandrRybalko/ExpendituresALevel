@@ -34,7 +34,7 @@ namespace ExpendituresALevel.Controllers
             return result;
         }
 
-        [System.Web.Http.HttpGet]
+        /*[System.Web.Http.HttpGet]
         [MyException]
         public string GetTrafficData(string category)
         {
@@ -50,6 +50,6 @@ namespace ExpendituresALevel.Controllers
             }
 
 
-        }
+        }*/
     }
 }

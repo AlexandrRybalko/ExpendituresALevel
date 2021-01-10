@@ -18,10 +18,18 @@ namespace ExpendituresALevel.Models
         }
     }
 
+    public class ExpenditureRole : IdentityRole
+    {
+
+        public ExpenditureRole() { }
+
+        public string Description { get; set; }
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ExpendituresContext", throwIfV1Schema: false)
         {
         }
 

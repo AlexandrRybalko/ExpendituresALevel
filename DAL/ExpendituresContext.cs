@@ -12,7 +12,7 @@ namespace DAL
     {
         public ExpendituresContext() : base("name=ExpendituresContext")
         {
-            Database.SetInitializer<ExpendituresContext>(new ExpenditureInitializer());
+            Database.SetInitializer<ExpendituresContext>(null);
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -20,6 +20,7 @@ namespace DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<ExpendituresContext>(null);
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Transaction>()

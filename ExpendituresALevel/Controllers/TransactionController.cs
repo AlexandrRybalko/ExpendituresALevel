@@ -2,6 +2,7 @@
 using BL.BLModels;
 using BL.Services;
 using ExpendituresALevel.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace ExpendituresALevel.Controllers
             var blTransactions = _transactionService.GetTransactions();
             var transactions = _mapper.Map<IEnumerable<TransactionModel>>(blTransactions);
 
-            return View("/Views/Transaction/Transactions.cshtml", transactions);
+            return View("/Views/Transaction/Transactions.cshtml", transactions.Where(x => x.UserId == User.Identity.GetUserId()));
         }
 
         // GET: Transaction/Details/5
@@ -50,6 +51,8 @@ namespace ExpendituresALevel.Controllers
         {
             model.CreatedDate = DateTime.Now;
             model.UpdatedDate = DateTime.Now;
+            model.UserId = User.Identity.GetUserId();
+            var id = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
                 var tranasaction = _mapper.Map<TransactionBLModel>(model);

@@ -12,7 +12,7 @@ using ExpendituresALevel.Filters.Exceptions;
 
 namespace ExpendituresALevel.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [MyException]
     public class CategoryController : Controller
     {
